@@ -17,7 +17,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          openPrs=$(gh pr list --base master)
+          openPrs=$(gh pr list --base master --head develop)
           # check if there is already an open pr. This only prevent an error because github
           # can not have 2 open prs with the same source and target
           if [ -z "$openPrs" ]
