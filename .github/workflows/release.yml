@@ -1,0 +1,26 @@
+name: Create Release PR
+
+on:
+  push:
+  schedule:
+  - cron: '*/10 * * * *'
+
+jobs:
+  create-pr:
+    name: create pr
+    runs-on: ubuntu-latest
+    steps:
+        #need checkout to read the .git folder
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: create release pr
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          openPrs=$(gh pr list --base master --head develop)
+          # check if there is already an open pr. This only prevent an error because github
+          # can not have 2 open prs with the same source and target
+          if [ -z "$openPrs" ]
+          then
+            gh pr create --base master --head develop --title "Create release" --body "release 11/01/2023."
+          fi
