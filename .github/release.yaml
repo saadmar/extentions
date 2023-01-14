@@ -4,6 +4,6 @@ branchSequence:
       autoCreatePullRequest: true
       reviewers: 
         - saadmar
-      additionalTasks
+      additionalTasks:
         - name: "test in dev environment"
     - name: master
